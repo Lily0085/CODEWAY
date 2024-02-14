@@ -1,0 +1,64 @@
+def add(numbers):
+    return sum(numbers)
+
+def subtract(numbers):
+    result = numbers[0]
+    for num in numbers[1:]:
+        result -= num
+    return result
+
+def multiply(numbers):
+    result = 1
+    for num in numbers:
+        result *= num
+    return result
+
+def divide(numbers):
+    result = numbers[0]
+    for num in numbers[1:]:
+        result /= num
+    return result
+
+def get_numbers(num_digits):
+    numbers = []
+    for _ in range(num_digits):
+        while True:
+            user_input = input(f"Enter number {_ + 1}: ")
+            try:
+                number = float(user_input)
+                numbers.append(number)
+                break
+            except ValueError:
+                print("Invalid input! Please enter a valid number.")
+    return numbers
+
+def main():
+    try:
+        num_digits = int(input("Enter the number of digits: "))
+        if num_digits <= 0:
+            raise ValueError
+    except ValueError:
+        print("Invalid input! Please enter a positive integer.")
+        return
+
+    numbers = get_numbers(num_digits)
+
+    operation = input("Enter operation (+, -, *, /): ")
+    if operation not in ['+', '-', '*', '/']:
+        print("Invalid operation! Please choose from +, -, *, /.")
+        return
+
+    if numbers:
+        if operation == '+':
+            print("Sum:", add(numbers))
+        elif operation == '-':
+            print("Difference:", subtract(numbers))
+        elif operation == '*':
+            print("Product:", multiply(numbers))
+        elif operation == '/':
+            print("Quotient:", divide(numbers))
+    else:
+        print("No numbers were entered.")
+
+if __name__ == "__main__":
+    main()
